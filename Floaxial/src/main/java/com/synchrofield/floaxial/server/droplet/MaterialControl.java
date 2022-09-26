@@ -398,8 +398,7 @@ public class MaterialControl {
 
 		int drop = Droplet.fromShort(entry.getShortKey(), entry.getShortValue());
 
-		//		int GhostProcessWindow = configure.ghostLookahead << Droplet.TimeDecimalSize;
-		int GhostProcessWindow = 20 << Droplet.TimeDecimalSize;
+		int GhostProcessWindow = configure.ghostLookahead << Droplet.TimeDecimalSize;
 
 		int expireDeltaExact = Droplet.timeGet(drop);
 
