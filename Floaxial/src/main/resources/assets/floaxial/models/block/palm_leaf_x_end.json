@@ -1,0 +1,6 @@
+{
+  "parent": "floaxial:block/leaf_x_end",
+  "textures": {
+    "cross": "floaxial:block/palm_leaf_x_end"
+  }
+}
