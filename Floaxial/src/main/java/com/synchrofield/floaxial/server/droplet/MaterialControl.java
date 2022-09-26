@@ -398,17 +398,21 @@ public class MaterialControl {
 
 		int drop = Droplet.fromShort(entry.getShortKey(), entry.getShortValue());
 
-		int GhostProcessWindow = configure.ghostLookahead << Droplet.TimeDecimalSize;
+		//		int GhostProcessWindow = configure.ghostLookahead << Droplet.TimeDecimalSize;
+		int GhostProcessWindow = 20 << Droplet.TimeDecimalSize;
 
 		int expireDeltaExact = Droplet.timeGet(drop);
 
 		expireDeltaExact -= (ghostDeltaTick << Droplet.TimeDecimalSize);
+		expireDeltaExact = Math.max(0, expireDeltaExact);
+
+		// write new expire
+		drop = Droplet.timeSet(drop, expireDeltaExact);
+		entry.setValue(Droplet.toData(drop));
+
 		if (expireDeltaExact > GhostProcessWindow) {
 
 			// too soon to process
-			drop = Droplet.timeSet(drop, expireDeltaExact);
-			entry.setValue(Droplet.toData(drop));
-
 			return true;
 		}
 
@@ -441,9 +445,9 @@ public class MaterialControl {
 			return true;
 		}
 
-		// decrement time
-		drop = Droplet.timeSet(drop, expireDeltaExact);
-		entry.setValue(Droplet.toData(drop));
+		//		// decrement time
+		//		drop = Droplet.timeSet(drop, expireDeltaExact);
+		//		entry.setValue(Droplet.toData(drop));
 
 		// process slightly before turning back to normal block
 		if (!dropProcess(level, tick, 0, sectionLocation, section, entry, moveList, true,
@@ -502,26 +506,30 @@ public class MaterialControl {
 
 		int energy0 = Droplet.energyGet(drop);
 
-		if (energy0 > 0) {
+		Direction direction0 = Geometry.DirectionFromPack[Droplet.directionGet(drop)];
 
-			// damp more if going fast
-			double dampEnergyChance = 0.5
-					* ((double) (energy0 + 1) / (double) (Droplet.EnergyMaximum + 1));
+		// don't damp falling blocks otherwise they jerk
+		if (direction0 != Direction.DOWN) {
 
-			double dampChance = MathUtility.capNormal(0.5 + dampEnergyChance);
+			if (energy0 > 0) {
 
-			if (level.random.nextDouble() <= dampChance) {
+				// damp more if going fast
+				double dampEnergyChance = 0.5
+						* ((double) (energy0 + 1) / (double) (Droplet.EnergyMaximum + 1));
 
-				energy0 = dropPhysics.energyCap(energy0 - 1);
+				double dampChance = MathUtility.capNormal(0.5 + dampEnergyChance);
 
-				drop = Droplet.energySet(drop, energy0);
+				if (level.random.nextDouble() <= dampChance) {
 
-				// update hash value in situ
-				entry.setValue(Droplet.toData(drop));
+					energy0 = dropPhysics.energyCap(energy0 - 1);
+
+					drop = Droplet.energySet(drop, energy0);
+
+					// update droplet map value in situ
+					entry.setValue(Droplet.toData(drop));
+				}
 			}
 		}
-
-		Direction direction0 = Geometry.DirectionFromPack[Droplet.directionGet(drop)];
 
 		DropletMove move = levelTryAllMove(level, sourceLocation, energy0, direction0, ghostIs);
 		if (move == null) {

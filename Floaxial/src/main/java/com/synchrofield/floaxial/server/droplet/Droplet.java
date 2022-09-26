@@ -15,7 +15,6 @@ public class Droplet {
 	public static final int LocationClear = (~LocationMask);
 
 	// start of move, fixed decimal
-	// only applicable to ghost mode
 	public static final int TimeIndex = 16;
 	public static final int TimeSize = 10;
 	public static final int TimeMaximum = (1 << TimeSize) - 1;
@@ -23,8 +22,13 @@ public class Droplet {
 	public static final int TimeMask = TimeMaximum << TimeIndex;
 	public static final int TimeClear = (~TimeMask);
 
+	// decimal from 0 to 15
 	public static final int TimeDecimalScale = 16;
+
+	// decimal is 4 bit
 	public static final int TimeDecimalSize = 4;
+
+	// integer part is 0 to 63
 	public static final int TimeIntegerMaximum = 64 - 1;
 
 	public static final int EnergyIndex = TimeIndex + TimeSize;

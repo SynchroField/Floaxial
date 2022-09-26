@@ -24,7 +24,7 @@ public class DropNetwork {
 	public final static int LocationClear = ~LocationMask;
 
 	// start tick of move, fixed decimal
-	// later 6 bit integer 4 bit decimal
+	// 6 bit integer 4 bit decimal
 	public final static int TimeIndex = LocationIndex + LocationSize;
 	public final static int TimeSize = Droplet.TimeSize;
 	public final static int TimeMaximum = (1 << TimeSize) - 1;
