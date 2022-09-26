@@ -388,7 +388,6 @@ public class MaterialControl {
 		}
 	}
 
-	// external move are implicitly ghosts
 	// return false if move or delete
 	public boolean ghostProcess(ServerLevel level, long tick, int ghostDeltaTick,
 			SectionPos sectionLocation, DropletSection section, Short2ShortMap.Entry entry,
@@ -405,13 +404,12 @@ public class MaterialControl {
 		expireDeltaExact -= (ghostDeltaTick << Droplet.TimeDecimalSize);
 		expireDeltaExact = Math.max(0, expireDeltaExact);
 
-		// write new expire
-		drop = Droplet.timeSet(drop, expireDeltaExact);
-		entry.setValue(Droplet.toData(drop));
-
 		if (expireDeltaExact > GhostProcessWindow) {
 
 			// too soon to process
+			drop = Droplet.timeSet(drop, expireDeltaExact);
+			entry.setValue(Droplet.toData(drop));
+
 			return true;
 		}
 
@@ -444,10 +442,9 @@ public class MaterialControl {
 			return true;
 		}
 
-		//		// decrement time
-		//		drop = Droplet.timeSet(drop, expireDeltaExact);
-		//		entry.setValue(Droplet.toData(drop));
-
+		drop = Droplet.timeSet(drop, expireDeltaExact);
+		entry.setValue(Droplet.toData(drop));
+		
 		// process slightly before turning back to normal block
 		if (!dropProcess(level, tick, 0, sectionLocation, section, entry, moveList, true,
 				expireDeltaExact)) {
@@ -593,8 +590,8 @@ public class MaterialControl {
 
 		moveHistory.increment();
 
-		// move
-		return false;
+				return false;
+//		return true;
 	}
 
 	// try direct hole 
