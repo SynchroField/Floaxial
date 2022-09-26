@@ -388,12 +388,6 @@ public class CentralControl implements CommandReceive, TerrainEventReceive {
 
 			client.onRender(minecraft.level, event);
 		}
-		//		else if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_TRANSLUCENT_BLOCKS) {
-		//
-		//			Minecraft minecraft = Minecraft.getInstance();
-		//
-		//			client.onRender(minecraft.level, event, true);
-		//		}
 	}
 
 	@Override
