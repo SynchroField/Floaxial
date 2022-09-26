@@ -1,5 +1,7 @@
 A modification for Minecraft that adds block physics.
 
+[Latest Version 0.2.alpha](https://github.com/SynchroField/Floaxial/releases/download/0.2.alpha/Floaxial-0.2.alpha.jar) 0.5 MB Jar File
+
 ## Overview
 
  - Make any block a falling type (stone, dirt, water).
