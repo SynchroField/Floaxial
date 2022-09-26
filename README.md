@@ -1,7 +1,6 @@
-# Floaxial
 A modification for Minecraft that adds block physics.
 
-#Overview
+## Overview
 
  - Make any block a falling type (stone, dirt, water).
 
