@@ -7,7 +7,7 @@ public class ProductConfigure {
 
 	public static final String VersionType = "alpha";
 	public static final int VersionMajor = 0;
-	public static final int VersionMinor = 2;
+	public static final int VersionMinor = 3;
 	public static final String VersionDisplay = VersionMajor + "." + VersionMinor + "."
 			+ VersionType;
 	public static final String VersionDate = "2022Sep26";
