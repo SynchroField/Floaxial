@@ -1,7 +1,8 @@
 A modification for Minecraft that adds block physics.
 
 ## Latest Version
- - [0.2.alpha](https://github.com/SynchroField/Floaxial/releases/download/0.2.alpha/Floaxial-0.2.alpha.jar) 
+ - [0.3.alpha](https://github.com/SynchroField/Floaxial/releases/download/0.3.alpha/Floaxial-0.3.alpha.jar) 
+ - 2022 sep 26
  - 0.5 MB Jar File
  - For Minecraft 1.18.2
 
