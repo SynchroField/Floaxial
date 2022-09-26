@@ -327,16 +327,6 @@ public class CentralControl implements CommandReceive, TerrainEventReceive {
 							server.onTick(level);
 						}
 					}
-					else {
-
-						// client
-						if (event.world instanceof ClientLevel) {
-
-							ClientLevel level = (ClientLevel) event.world;
-
-							client.onTick(level);
-						}
-					}
 				}
 			}
 		}

@@ -6,6 +6,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.synchrofield.floaxial.central.droplet.DropletMaterial;
 import com.synchrofield.floaxial.central.droplet.MaterialPhysics;
+import com.synchrofield.library.math.MathUtility;
 
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
@@ -17,6 +18,7 @@ import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.Direction;
+import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.model.data.EmptyModelData;
@@ -54,7 +56,7 @@ public class MoveRender {
 	public void animateListRender(ClientLevel level, Camera camera, PoseStack pose, MovePool pool,
 			int materialIndex, DropletMaterial material, MaterialPhysics materialPhysics) {
 
-//		ForgeHooksClient.setRenderType(RenderType.translucent());
+		//		ForgeHooksClient.setRenderType(RenderType.translucent());
 
 		BlockState blockState = material.renderState;
 
@@ -169,13 +171,18 @@ public class MoveRender {
 		Vec3 position = sourcePosition.add(deltaPositionVector);
 
 		// light
-		int blockLightSize = level.getMaxLocalRawBrightness(animate.sourceLocation);
-		
-		pose.pushPose();
+		int ambientLightSize = level.getSkyDarken();
 
+		int lightSize = level.getLightEngine()
+				.getRawBrightness(animate.sourceLocation.above(), ambientLightSize);
+
+		lightSize <<= 4;
+		lightSize = MathUtility.cap(lightSize, 255);
+
+		pose.pushPose();
 		pose.translate(position.x, position.y, position.z);
 
-		blockRenderDispatcher.renderSingleBlock(material.renderState, pose, bufferSource, blockLightSize,
+		blockRenderDispatcher.renderSingleBlock(material.renderState, pose, bufferSource, lightSize,
 				OverlayTexture.NO_OVERLAY, EmptyModelData.INSTANCE);
 
 		pose.popPose();

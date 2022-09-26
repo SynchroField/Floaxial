@@ -17,8 +17,6 @@ public abstract class Client implements ClientNetworkReceive {
 
 	public abstract void reset(ClientLevel level);
 
-	public abstract void onTick(ClientLevel level);
-
 	public abstract void onRender(ClientLevel level, RenderLevelStageEvent event);
 
 	public abstract void onFogRender(EntityViewRenderEvent.RenderFogEvent event);

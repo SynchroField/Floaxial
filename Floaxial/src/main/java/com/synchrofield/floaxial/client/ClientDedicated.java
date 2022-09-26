@@ -53,11 +53,6 @@ public class ClientDedicated extends Client {
 	}
 
 	@Override
-	public void onTick(ClientLevel level) {
-
-	}
-
-	@Override
 	public void onRender(ClientLevel level, RenderLevelStageEvent event) {
 
 	}

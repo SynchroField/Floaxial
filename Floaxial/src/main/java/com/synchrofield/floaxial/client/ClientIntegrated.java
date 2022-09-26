@@ -107,25 +107,11 @@ public class ClientIntegrated extends Client {
 		// fluid
 		ItemBlockRenderTypes.setRenderLayer(centralRegistry.fluid.SaltWaterStillFluidObject.get(),
 				RenderType.translucent());
-
-		//		ItemBlockRenderTypes.setRenderLayer(centralRegistry.block.SaltWaterRenderObject.get(),
-		//				RenderType.translucent());
 	}
 
 	public boolean levelCheck() {
 
 		return levelControl != null;
-	}
-
-	@Override
-	public void onTick(ClientLevel level) {
-
-		if (!levelCheck()) {
-
-			return;
-		}
-
-		levelControl.onTick(level);
 	}
 
 	public void statisticsDisplay(ClientLevel level, ServerStatistics serverStatistics,
@@ -152,6 +138,8 @@ public class ClientIntegrated extends Client {
 	@Override
 	public void onRender(ClientLevel level, RenderLevelStageEvent event) {
 
+		level.updateSkyBrightness();
+		
 		levelControl.onRender(level, event);
 	}
 
