@@ -50,7 +50,7 @@ public class ItemRegistry {
 						new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
 
 		registry.register(configure.SaltWaterBlock.path(),
-				() -> new BlockItem(blockRegistry.SaltWaterRenderObject.get(),
+				() -> new BlockItem(blockRegistry.SaltWaterObject.get(),
 						new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
 
 		registry.register(configure.SaltWaterRenderBlock.path(),
