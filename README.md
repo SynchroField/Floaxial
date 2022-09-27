@@ -20,4 +20,4 @@ A modification for Minecraft that adds block physics.
 
  - Uses plain rendering instead of entities or block states.
 
-See [Documentation](https://github.com/SynchroField/Floaxial/wiki) for more information.
+See [Documentation](https://github.com/SynchroField/Floaxial/wiki/Documentation) for more information.
